@@ -35,7 +35,7 @@ userRouter.post("/login", async (req, res) => {
         if (result) {
           res.status(200).send({
             msg: "Login Successfully",
-            token: jwt.sign({ userID: user._id }, "eval"),
+            token: jwt.sign({ userID: user._id }, "avengers"),
           });
         } else {
           res.status(400).send({ msg: "Wrong Credentials" });
