@@ -6,22 +6,21 @@ const bcrypt = require("bcrypt");
 
 // Register
 userRouter.post("/register", async (req, res) => {
-  const { name, email, gender, password, age, city } = req.body;
+  const { name, email, phone, password, address } = req.body;
   try {
     bcrypt.hash(password, 5, async (err, hash) => {
       const user = new UserModel({
         name,
         email,
-        gender,
+        phone,
         password: hash,
-        age,
-        city,
+        address,
       });
       await user.save();
-      res.status(200).send("Registration Successfully");
+      res.status(200).send("User Registration Successfully");
     });
   } catch (err) {
-    res.status(400).send("Registartion failed");
+    res.status(400).send("User Registartion failed");
   }
 });
 
@@ -34,7 +33,7 @@ userRouter.post("/login", async (req, res) => {
       bcrypt.compare(password, user.password, (err, result) => {
         if (result) {
           res.status(200).send({
-            msg: "Login Successfully",
+            msg: "User Login Successfully",
             token: jwt.sign({ userID: user._id }, "avengers"),
           });
         } else {

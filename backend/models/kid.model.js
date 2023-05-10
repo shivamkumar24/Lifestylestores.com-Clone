@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const bagSchema = mongoose.Schema(
+const kidSchema = mongoose.Schema(
   {
     title: { type: String, required: true },
     image: { type: String, required: true },
@@ -17,8 +17,8 @@ const bagSchema = mongoose.Schema(
   }
 );
 
-const BagModel = mongoose.model("bags", bagSchema);
+const KidModel = mongoose.model("kids", kidSchema);
 
 module.exports = {
-  BagModel,
+  KidModel,
 };

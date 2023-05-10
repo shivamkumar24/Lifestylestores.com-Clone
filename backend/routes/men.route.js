@@ -17,7 +17,7 @@ menRouter.post("/add", async (req, res) => {
   try {
     const newMenItem = new MenModel(req.body);
     await newMenItem.save();
-    res.status(200).send({ msg: "Mew men item added" });
+    res.status(200).send({ msg: "New men item added" });
   } catch (error) {
     res.status(400).send({ msg: error.message });
   }
