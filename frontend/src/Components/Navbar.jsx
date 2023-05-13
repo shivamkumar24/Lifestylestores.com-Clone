@@ -1,18 +1,19 @@
 import {
   Box,
+  Menu,
   Flex,
+  Text,
   Image,
   Input,
+  Button,
+  Popover,
+  useToast,
+  MenuList,
+  MenuItem,
+  MenuGroup,
+  MenuButton,
   InputGroup,
   InputLeftElement,
-  Menu,
-  MenuButton,
-  MenuGroup,
-  MenuItem,
-  MenuList,
-  Popover,
-  Text,
-  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 import SideBar from "./Sidebar";
@@ -163,6 +164,15 @@ const Navbar = () => {
                   Sign Up
                 </MenuItem>
               )} */}
+              <MenuItem
+                _hover={{ backgroundColor: "pink" }}
+                backgroundColor="#fdb852"
+                onClick={() => {
+                  navigate("/signup");
+                }}
+              >
+                SignUp
+              </MenuItem>
             </MenuList>
           </Menu>
         </Popover>
