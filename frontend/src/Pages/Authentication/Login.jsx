@@ -35,27 +35,23 @@ const Login = () => {
     axios
       .post(`https://calm-tutu-bass.cyclic.app/user/login`, LoginData)
       .then((res) => {
-        //  toast({
-        //    title: res.data.msg,
-        //    status: "success",
-        //    isClosable: true,
-        //  });
-        //  localStorage.setItem("user-token", res.data.token);
-        //  localStorage.setItem(
-        //    "user-details",
-        //    JSON.stringify(res.data.user[0])
-        //  );
-        //  navigate("/");
-        //  window.location.reload();
         console.log(res);
+        toast({
+          title: res.data.msg,
+          status: "success",
+          isClosable: true,
+        });
+        localStorage.setItem("user-token", res.data.token);
+        localStorage.setItem("user-details", JSON.stringify(res.data.user));
+        navigate("/");
+        window.location.reload();
       })
       .catch((e) =>
-        //  toast({
-        //    title: "Invalid Credentials",
-        //    status: "error",
-        //    isClosable: true,
-        //  })
-        console.log(e)
+        toast({
+          title: "Invalid Credentials",
+          status: "error",
+          isClosable: true,
+        })
       );
   };
 

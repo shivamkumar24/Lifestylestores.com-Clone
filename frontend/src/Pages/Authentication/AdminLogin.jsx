@@ -34,27 +34,23 @@ const AdminLogin = () => {
     axios
       .post(`https://calm-tutu-bass.cyclic.app/admin/login`, AdminLoginData)
       .then((res) => {
-        //  toast({
-        //    title: res.data.msg,
-        //    status: "success",
-        //    isClosable: true,
-        //  });
-        //  localStorage.setItem("admin-token", res.data.token);
-        //  localStorage.setItem(
-        //    "admin-details",
-        //    JSON.stringify(res.data.admin[0])
-        //  );
-        //  navigate("/admin");
-        //  window.location.reload();
         console.log(res);
+        toast({
+          title: res.data.msg,
+          status: "success",
+          isClosable: true,
+        });
+        localStorage.setItem("admin-token", res.data.token);
+        localStorage.setItem("admin-details", JSON.stringify(res.data.admin));
+        navigate("/admin");
+        window.location.reload();
       })
       .catch((e) =>
-        //  toast({
-        //    title: "Invalid Credentials",
-        //    status: "error",
-        //    isClosable: true,
-        //  })
-        console.log(e)
+        toast({
+          title: "Invalid Credentials",
+          status: "error",
+          isClosable: true,
+        })
       );
   };
 
