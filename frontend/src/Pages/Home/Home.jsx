@@ -4,6 +4,7 @@ import MenStore from "./MenStore";
 import KidStore from "./KidStore";
 import HomeSlider from "./HomeSlider";
 import WomenStore from "./WomenStore";
+import { Link } from "react-router-dom";
 import MidSeasonDealsSlider from "./MidSeasonDealsSlider";
 import { Box, Text, Progress, Image } from "@chakra-ui/react";
 
@@ -78,14 +79,16 @@ const Home = () => {
         >
           Women's Store
         </Text>
-        <Box marginTop={{ base: 3, sm: 4, md: 6, lg: 7 }}>
-          <Image
-            width="100%"
-            borderRadius={"20px"}
-            src="https://lmsin.net/cdn-cgi/image/w=1232,q=70,fit=cover/https://70415bb9924dca896de0-34a37044c62e41b40b39fcedad8af927.lmsin.net/LS-Fest/LS-new/LS-UberHP-PromoWidget24-Desk-Banner1-25Apr23.jpg"
-          />
-        </Box>
-        <WomenStore />
+        <Link to="/women">
+          <Box marginTop={{ base: 3, sm: 4, md: 6, lg: 7 }}>
+            <Image
+              width="100%"
+              borderRadius={"20px"}
+              src="https://lmsin.net/cdn-cgi/image/w=1232,q=70,fit=cover/https://70415bb9924dca896de0-34a37044c62e41b40b39fcedad8af927.lmsin.net/LS-Fest/LS-new/LS-UberHP-PromoWidget24-Desk-Banner1-25Apr23.jpg"
+            />
+          </Box>
+          <WomenStore />
+        </Link>
       </Box>
 
       {/* Men Store */}
@@ -102,14 +105,16 @@ const Home = () => {
         >
           Men's Store
         </Text>
-        <Box marginTop={{ base: 3, sm: 4, md: 6, lg: 7 }}>
-          <Image
-            width="100%"
-            borderRadius={"20px"}
-            src="https://lmsin.net/cdn-cgi/image/w=1232,q=70,fit=cover/https://70415bb9924dca896de0-34a37044c62e41b40b39fcedad8af927.lmsin.net/LS-Fest/LS-new/desktop-LS-UBERHP-GiftCard-13modblock-oneBythree-A-25Apr2023.jpg"
-          />
-        </Box>
-        <MenStore />
+        <Link to="/men">
+          <Box marginTop={{ base: 3, sm: 4, md: 6, lg: 7 }}>
+            <Image
+              width="100%"
+              borderRadius={"20px"}
+              src="https://lmsin.net/cdn-cgi/image/w=1232,q=70,fit=cover/https://70415bb9924dca896de0-34a37044c62e41b40b39fcedad8af927.lmsin.net/LS-Fest/LS-new/desktop-LS-UBERHP-GiftCard-13modblock-oneBythree-A-25Apr2023.jpg"
+            />
+          </Box>
+          <MenStore />
+        </Link>
       </Box>
 
       {/* Kid Store */}
@@ -126,14 +131,16 @@ const Home = () => {
         >
           Kid's Store
         </Text>
-        <Box marginTop={{ base: 3, sm: 4, md: 6, lg: 7 }}>
-          <Image
-            width="100%"
-            borderRadius={"20px"}
-            src="https://lmsin.net/cdn-cgi/image/w=1232,q=70,fit=cover/https://70415bb9924dca896de0-34a37044c62e41b40b39fcedad8af927.lmsin.net/LS-Fest/LS-new/LS-UberHP-Promowidget26-Desk-Banner1-25Apr23.jpg"
-          />
-        </Box>
-        <KidStore />
+        <Link to="/kid">
+          <Box marginTop={{ base: 3, sm: 4, md: 6, lg: 7 }}>
+            <Image
+              width="100%"
+              borderRadius={"20px"}
+              src="https://lmsin.net/cdn-cgi/image/w=1232,q=70,fit=cover/https://70415bb9924dca896de0-34a37044c62e41b40b39fcedad8af927.lmsin.net/LS-Fest/LS-new/LS-UberHP-Promowidget26-Desk-Banner1-25Apr23.jpg"
+            />
+          </Box>
+          <KidStore />
+        </Link>
       </Box>
     </Box>
   );
