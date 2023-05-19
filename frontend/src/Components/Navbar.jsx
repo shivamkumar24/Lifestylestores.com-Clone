@@ -71,7 +71,7 @@ const Navbar = () => {
         >
           <Link to="/women">Women</Link>
           <Link to="/men">Men</Link>
-          <Link to="/kids">Kids</Link>
+          <Link to="/kid">Kids</Link>
           <Link to="/shoes">Shoes</Link>
           <Link to="/beauty">Beauty</Link>
         </Flex>
