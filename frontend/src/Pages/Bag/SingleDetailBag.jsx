@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { MdLocalShipping } from "react-icons/md";
 
-const SingleDetailKid = () => {
+const SingleDetailBag = () => {
   const { id } = useParams();
   const toast = useToast();
   const [data, setData] = useState();
@@ -29,11 +29,11 @@ const SingleDetailKid = () => {
   const getData = () => {
     setLoading(true);
     axios
-      .get(`https://calm-tutu-bass.cyclic.app/kid/${id}`)
+      .get(`https://calm-tutu-bass.cyclic.app/bag/${id}`)
       .then((res) => res.data)
       .then((res) => {
-        console.log(res.kids);
-        setData(res.kids);
+        console.log(res.bags);
+        setData(res.bags);
         setLoading(false);
       })
       .catch((err) => {
@@ -278,4 +278,4 @@ const SingleDetailKid = () => {
   );
 };
 
-export default SingleDetailKid;
+export default SingleDetailBag;
