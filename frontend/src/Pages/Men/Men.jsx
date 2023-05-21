@@ -4,28 +4,23 @@ import React, { useEffect, useState } from "react";
 import { Box, Flex, Grid, Select, Button, Heading } from "@chakra-ui/react";
 
 const Men = () => {
-  const [loading, setLoading] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState([]);
   const [sort, setSort] = useState("price");
   const [order, setOrder] = useState("asc");
   const [category, setCategory] = useState("Casual Shirts");
   const [page, setPage] = useState(1);
 
-  const getData = (page, sort, order, category) => {
-    setLoading(true);
-    axios
-      .get(
+  const getData = async (page, sort, order, category) => {
+    try {
+      const response = await axios.get(
         `https://calm-tutu-bass.cyclic.app/men?sort=${sort}&order=${order}&category=${category}&page=${page}`
-      )
-      .then((res) => res.data)
-      .then((res) => {
-        setData(res.mens);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+      );
+      const data1 = response.data.mens;
+      setData(data1);
+    } catch (error) {
+      console.log("Error: ", error);
+    }
   };
 
   const sortChange = () => {
@@ -40,13 +35,21 @@ const Men = () => {
 
   useEffect(() => {
     getData(page, sort, order, category);
-  }, [page, order, sort, category]);
+    if (!loaded) {
+      setLoaded(true);
+      const pageRelaod = setTimeout(() => {
+        window.location.reload();
+      }, 100);
+
+      clearTimeout(pageRelaod);
+    }
+  }, [page, sort, order, category, loaded]);
 
   console.log(data);
 
   return (
     <Box>
-      {loading === true ? (
+      {data === [] ? (
         <Heading>Loading ......</Heading>
       ) : (
         <>

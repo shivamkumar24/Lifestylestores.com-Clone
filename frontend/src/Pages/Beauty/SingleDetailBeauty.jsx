@@ -23,28 +23,32 @@ import { MdLocalShipping } from "react-icons/md";
 const SingleDetailBeauty = () => {
   const { id } = useParams();
   const toast = useToast();
-  const [data, setData] = useState();
-  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState(null);
+  const [loaded, setLoaded] = useState(false);
 
-  const getData = () => {
-    setLoading(true);
-    axios
-      .get(`https://calm-tutu-bass.cyclic.app/beauty/${id}`)
-      .then((res) => res.data)
-      .then((res) => {
-        console.log(res.beauties);
-        setData(res.beauties);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
+  const getData = async () => {
+    try {
+      const response = await axios.get(
+        `https://calm-tutu-bass.cyclic.app/beauty/${id}`
+      );
+      const data1 = response.data.beauties;
+      setData(data1);
+    } catch (error) {
+      console.log("Error: ", error);
+    }
   };
 
   useEffect(() => {
     getData();
-  }, []);
+    if (!loaded) {
+      setLoaded(true);
+      const pageRelaod = setTimeout(() => {
+        window.location.reload();
+      }, 100);
+
+      clearTimeout(pageRelaod);
+    }
+  }, [loaded]);
 
   console.log(data);
 
@@ -54,7 +58,7 @@ const SingleDetailBeauty = () => {
 
   return (
     <Box>
-      {loading === true ? (
+      {data === null ? (
         <Heading>Loading ......</Heading>
       ) : (
         <Container maxW={"90%"}>
