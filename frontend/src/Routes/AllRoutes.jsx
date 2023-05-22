@@ -35,7 +35,7 @@ const AllRoutes = () => {
       <Route path="/shoes/:id" element={<SingleDetailShoes />} />
       <Route path="/beauty" element={<Beauty />} />
       <Route path="/beauty/:id" element={<SingleDetailBeauty />} />
-      <Route path="/search" element={<Search />} />
+      <Route path="/search/:query" element={<Search />} />
     </Routes>
   );
 };

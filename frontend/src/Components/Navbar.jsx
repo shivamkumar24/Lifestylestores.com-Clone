@@ -5,7 +5,6 @@ import {
   Text,
   Image,
   Input,
-  Button,
   Popover,
   useToast,
   MenuList,
@@ -14,17 +13,21 @@ import {
   MenuButton,
   InputGroup,
   InputLeftElement,
+  Button,
+  HStack,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import SideBar from "./Sidebar";
 import Logo from "../Assets/logo.png";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsBag, BsPerson, BsSearch } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
+import Search from "../Pages/Search/Search";
 
 const Navbar = () => {
   const toast = useToast();
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <Box
@@ -44,20 +47,22 @@ const Navbar = () => {
 
       {/* --------------------------- Logo --------------------------- */}
       <Link to="/">
-        <Box>
-          <Image
-            src={Logo}
-            alt="logo"
-            margin={"auto"}
-            width={{ base: "90%", sm: "60%", md: "60%", lg: "60%" }}
-            height={{ base: "2rem", md: "100%" }}
-            // border="1px solid green"
-          />
-        </Box>
+        <Image
+          src={Logo}
+          alt="logo"
+          margin={"auto"}
+          width={{ base: "90%", sm: "60%", md: "60%", lg: "60%" }}
+          height={{ base: "2rem", md: "100%" }}
+          // border="1px solid green"
+        />
       </Link>
 
       {/* --------------------------- Nav-Items ------------------------ */}
-      <Box width="35%" display={{ base: "none", lg: "block" }}>
+      <Box
+        // width="35%"
+        display={{ base: "none", lg: "block" }}
+        // border="1px solid red"
+      >
         <Flex
           gap={5}
           pos="relative"
@@ -88,21 +93,30 @@ const Navbar = () => {
           marginTop="10px"
           // border="1px solid red"
         >
-          <InputGroup>
-            <InputLeftElement children={<BsSearch color="gray.300" />} />
-            <Input
-              type="text"
-              width="400px"
-              outline="none"
-              placeholder="What are you looking for?"
-              backgroundColor={"#ffffff"}
-              _focus={{
-                boxShadow: "none",
-                border: "1px solid #f89f17",
-                outline: "none",
-              }}
-            />
-          </InputGroup>
+          <HStack>
+            <InputGroup>
+              <InputLeftElement children={<BsSearch color="gray.300" />} />
+              <Input
+                type="text"
+                width="400px"
+                outline="none"
+                value={searchQuery}
+                placeholder="What are you looking for?"
+                backgroundColor={"#ffffff"}
+                _focus={{
+                  boxShadow: "none",
+                  border: "1px solid #f89f17",
+                  outline: "none",
+                }}
+                onChange={(event) => setSearchQuery(event.target.value)}
+              />
+            </InputGroup>
+            <Link to={`/search/${searchQuery}`}>
+              <Button colorScheme={"teal"} onClick={() => setSearchQuery("")}>
+                Search
+              </Button>
+            </Link>
+          </HStack>
         </Box>
       </Box>
 
