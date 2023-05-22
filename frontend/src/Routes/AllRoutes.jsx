@@ -10,6 +10,7 @@ import Kid from "../Pages/Kid/Kid";
 import Women from "../Pages/Women/Women";
 import Shoes from "../Pages/Shoes/Shoes";
 import Beauty from "../Pages/Beauty/Beauty";
+import Search from "../Pages/Search/Search";
 import SingleDetailKid from "../Pages/Kid/SingleDetailKid";
 import SingleDetailMen from "../Pages/Men/SingleDetailMen";
 import SingleDetailShoes from "../Pages/Shoes/SingleDetailShoes";
@@ -34,6 +35,7 @@ const AllRoutes = () => {
       <Route path="/shoes/:id" element={<SingleDetailShoes />} />
       <Route path="/beauty" element={<Beauty />} />
       <Route path="/beauty/:id" element={<SingleDetailBeauty />} />
+      <Route path="/search" element={<Search />} />
     </Routes>
   );
 };
