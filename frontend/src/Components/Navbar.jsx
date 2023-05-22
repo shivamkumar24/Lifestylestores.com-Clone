@@ -32,6 +32,9 @@ const Navbar = () => {
   const token = sessionStorage.getItem("user-token");
   const user = sessionStorage.getItem("user-details");
 
+  const parsedUser = JSON.parse(user);
+  const user_name = parsedUser.name;
+
   useEffect(() => {
     token === null ? setIsAuth(false) : setIsAuth(true);
   }, [token]);
@@ -148,7 +151,7 @@ const Navbar = () => {
             <MenuList>
               <MenuGroup title="Profile">
                 <MenuItem color="pink.400">
-                  Hey,{isAuth === true ? `${user.name}` : "User"}
+                  Hey,{isAuth === true ? `${user_name}` : "User"}
                 </MenuItem>
                 <MenuItem>My Account</MenuItem>
                 <MenuItem>Order History</MenuItem>
