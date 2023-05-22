@@ -40,8 +40,8 @@ const AdminLogin = () => {
           status: "success",
           isClosable: true,
         });
-        localStorage.setItem("admin-token", res.data.token);
-        localStorage.setItem("admin-details", JSON.stringify(res.data.admin));
+        sessionStorage.setItem("admin-token", res.data.token);
+        sessionStorage.setItem("admin-details", JSON.stringify(res.data.admin));
         navigate("/admin");
         window.location.reload();
       })
@@ -62,7 +62,7 @@ const AdminLogin = () => {
         isClosable: true,
       });
     } else {
-      localStorage.setItem("loginuser", JSON.stringify(AdminLoginData));
+      sessionStorage.setItem("loginuser", JSON.stringify(AdminLoginData));
     }
   };
 

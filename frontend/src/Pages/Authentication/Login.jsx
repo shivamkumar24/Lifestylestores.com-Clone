@@ -41,8 +41,8 @@ const Login = () => {
           status: "success",
           isClosable: true,
         });
-        localStorage.setItem("user-token", res.data.token);
-        localStorage.setItem("user-details", JSON.stringify(res.data.user));
+        sessionStorage.setItem("user-token", res.data.token);
+        sessionStorage.setItem("user-details", JSON.stringify(res.data.user));
         navigate("/");
         window.location.reload();
       })
@@ -63,7 +63,7 @@ const Login = () => {
         isClosable: true,
       });
     } else {
-      localStorage.setItem("loginuser", JSON.stringify(LoginData));
+      sessionStorage.setItem("loginuser", JSON.stringify(LoginData));
     }
   };
 

@@ -16,18 +16,30 @@ import {
   Button,
   HStack,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SideBar from "./Sidebar";
 import Logo from "../Assets/logo.png";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsBag, BsPerson, BsSearch } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import Search from "../Pages/Search/Search";
 
 const Navbar = () => {
   const toast = useToast();
   const navigate = useNavigate();
+  const [isAuth, setIsAuth] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const token = sessionStorage.getItem("user-token");
+  const user = sessionStorage.getItem("user-details");
+
+  useEffect(() => {
+    token === null ? setIsAuth(false) : setIsAuth(true);
+  }, [token]);
+
+  const userLogout = () => {
+    sessionStorage.clear();
+    window.location.reload();
+  };
 
   return (
     <Box
@@ -136,8 +148,7 @@ const Navbar = () => {
             <MenuList>
               <MenuGroup title="Profile">
                 <MenuItem color="pink.400">
-                  {/* Hey,{isAuth ? `${afterLoginUser.name}` : "User"} */}
-                  Hey, Shivam
+                  Hey,{isAuth === true ? `${user.name}` : "User"}
                 </MenuItem>
                 <MenuItem>My Account</MenuItem>
                 <MenuItem>Order History</MenuItem>
@@ -149,12 +160,12 @@ const Navbar = () => {
                 </MenuItem>
               </MenuGroup>
 
-              {/* {isAuth === true ? (
+              {isAuth === true ? (
                 <MenuItem
                   _hover={{ backgroundColor: "pink" }}
                   backgroundColor="#fdb852"
                   onClick={() => {
-                    dispatch(logout);
+                    userLogout();
                     toast({
                       title: "User Logout Successfully.",
                       description: "Come Back Again Soon",
@@ -177,16 +188,7 @@ const Navbar = () => {
                 >
                   Sign Up
                 </MenuItem>
-              )} */}
-              <MenuItem
-                _hover={{ backgroundColor: "pink" }}
-                backgroundColor="#fdb852"
-                onClick={() => {
-                  navigate("/signup");
-                }}
-              >
-                SignUp
-              </MenuItem>
+              )}
             </MenuList>
           </Menu>
         </Popover>

@@ -84,7 +84,7 @@ const SignUp = () => {
         isClosable: true,
       });
     } else {
-      localStorage.setItem("signupuser", JSON.stringify(SignupData));
+      sessionStorage.setItem("signupuser", JSON.stringify(SignupData));
     }
   };
 
