@@ -30,10 +30,10 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const token = sessionStorage.getItem("user-token");
-  const user = sessionStorage.getItem("user-details");
+  // const user = sessionStorage.getItem("user-details");
 
-  const parsedUser = JSON.parse(user);
-  const user_name = parsedUser.name;
+  // const parsedUser = JSON.parse(user);
+  // const user_name = parsedUser.name;
 
   useEffect(() => {
     token === null ? setIsAuth(false) : setIsAuth(true);
@@ -151,7 +151,8 @@ const Navbar = () => {
             <MenuList>
               <MenuGroup title="Profile">
                 <MenuItem color="pink.400">
-                  Hey,{isAuth === true ? `${user_name}` : "User"}
+                  {/* Hey,{isAuth === true ? `${user_name}` : "User"} */}
+                  Hey, User
                 </MenuItem>
                 <MenuItem>My Account</MenuItem>
                 <MenuItem>Order History</MenuItem>

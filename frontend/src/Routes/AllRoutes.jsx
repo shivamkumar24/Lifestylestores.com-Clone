@@ -1,7 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "../Pages/Home/Home";
+import Cart from "../Pages/Cart/Cart";
+import Order from "../Pages/Order/Order";
 import Admin from "../Pages/Admin/Admin";
+import Search from "../Pages/Search/Search";
 import Login from "../Pages/Authentication/Login";
 import SignUp from "../Pages/Authentication/SignUp";
 import AdminLogin from "../Pages/Authentication/AdminLogin";
@@ -10,7 +13,6 @@ import Kid from "../Pages/Kid/Kid";
 import Women from "../Pages/Women/Women";
 import Shoes from "../Pages/Shoes/Shoes";
 import Beauty from "../Pages/Beauty/Beauty";
-import Search from "../Pages/Search/Search";
 import SingleDetailKid from "../Pages/Kid/SingleDetailKid";
 import SingleDetailMen from "../Pages/Men/SingleDetailMen";
 import SingleDetailShoes from "../Pages/Shoes/SingleDetailShoes";
@@ -21,9 +23,12 @@ const AllRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/order" element={<Order />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route path="/search/:query" element={<Search />} />
       <Route path="/adminLogin" element={<AdminLogin />} />
       <Route path="/men" element={<Men />} />
       <Route path="/men/:id" element={<SingleDetailMen />} />
@@ -35,7 +40,6 @@ const AllRoutes = () => {
       <Route path="/shoes/:id" element={<SingleDetailShoes />} />
       <Route path="/beauty" element={<Beauty />} />
       <Route path="/beauty/:id" element={<SingleDetailBeauty />} />
-      <Route path="/search/:query" element={<Search />} />
     </Routes>
   );
 };
