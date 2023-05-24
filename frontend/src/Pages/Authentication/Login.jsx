@@ -41,7 +41,9 @@ const Login = () => {
           status: "success",
           isClosable: true,
         });
+        let userData = res.data.user;
         sessionStorage.setItem("user-token", res.data.token);
+        sessionStorage.setItem("userID", userData._id);
         sessionStorage.setItem("user-details", JSON.stringify(res.data.user));
         navigate("/");
         window.location.reload();

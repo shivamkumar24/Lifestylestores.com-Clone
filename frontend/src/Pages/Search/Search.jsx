@@ -27,6 +27,8 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [totaldata, setTotalData] = useState([]);
+  const userID = sessionStorage.getItem("userID");
+  const token = sessionStorage.getItem("user-token");
 
   console.log(query);
 
@@ -51,8 +53,50 @@ const Search = () => {
     });
   };
 
-  const handleCartAdd = () => {
-    // logic here
+  // --------------------- data added to cart --------------------------
+  const handleCartAdd = (el) => {
+    const CartDataObj = {
+      userID: userID,
+      productID: el._id,
+      title: el.title,
+      price: Number(el.price),
+      img1: el.img1,
+      img2: el.img2,
+      img3: el.img3,
+      img4: el.img4,
+      image: el.image,
+      category: el.category,
+      actualPrice: Number(el.actualPrice),
+    };
+
+    if (userID === undefined || userID === null) {
+      toast({
+        title: "Please Login First",
+        status: "error",
+        isClosable: true,
+      });
+    } else {
+      axios
+        .post(`https://calm-tutu-bass.cyclic.app/cart/add`, CartDataObj, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        })
+        .then((res) => {
+          toast({
+            title: res.data.msg,
+            status: "success",
+            isClosable: true,
+          });
+        })
+        .catch((e) =>
+          toast({
+            title: e.message,
+            status: "error",
+            isClosable: true,
+          })
+        );
+    }
   };
 
   useEffect(() => {
@@ -275,7 +319,7 @@ const Search = () => {
                   transform: "translateY(2px)",
                   boxShadow: "lg",
                 }}
-                onClick={handleCartAdd}
+                onClick={() => handleCartAdd(data)}
               >
                 Add to cart
               </Button>

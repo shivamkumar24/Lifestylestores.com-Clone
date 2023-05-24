@@ -16,6 +16,7 @@ import {
   Button,
   HStack,
 } from "@chakra-ui/react";
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import SideBar from "./Sidebar";
 import Logo from "../Assets/logo.png";
@@ -26,7 +27,9 @@ import { Link, useNavigate } from "react-router-dom";
 const Navbar = () => {
   const toast = useToast();
   const navigate = useNavigate();
+  const [loaded, setLoaded] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
+  // const [cartData, setCartData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   const token = sessionStorage.getItem("user-token");
@@ -35,9 +38,38 @@ const Navbar = () => {
   // const parsedUser = JSON.parse(user);
   // const user_name = parsedUser.name;
 
+  // const getCartData = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       "https://calm-tutu-bass.cyclic.app/cart",
+  //       {
+  //         headers: {
+  //           Authorization: `${token}`,
+  //         },
+  //       }
+  //     );
+  //     const data1 = response.data.cartData;
+  //     setCartData(data1);
+  //   } catch (error) {
+  //     console.log("Error: ", error);
+  //   }
+  // };
+
   useEffect(() => {
     token === null ? setIsAuth(false) : setIsAuth(true);
   }, [token]);
+
+  // useEffect(() => {
+  //   getCartData();
+  //   if (!loaded) {
+  //     setLoaded(true);
+  //     const pageRelaod = setTimeout(() => {
+  //       window.location.reload();
+  //     }, 100);
+
+  //     clearTimeout(pageRelaod);
+  //   }
+  // }, []);
 
   const userLogout = () => {
     sessionStorage.clear();
