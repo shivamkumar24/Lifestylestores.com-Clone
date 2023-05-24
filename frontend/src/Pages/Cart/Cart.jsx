@@ -1,10 +1,12 @@
 import axios from "axios";
 import Card from "../../Components/Card";
-import { Box, Button, Flex, Grid, Heading, useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { Box, Button, Flex, Grid, Heading, useToast } from "@chakra-ui/react";
 
 const Cart = () => {
   const toast = useToast();
+  const navigate = useNavigate();
   const [loaded, setLoaded] = useState(false);
   const [cartData, setCartData] = useState([]);
   const token = sessionStorage.getItem("user-token");
@@ -68,7 +70,16 @@ const Cart = () => {
 
   return (
     <Box style={{ padding: "20px" }}>
-      <Heading>Cart Items: {cartData.length}</Heading>
+      <Flex justifyContent={"space-around"}>
+        <Heading>Cart Items: {cartData.length}</Heading>
+        <Button
+          colorScheme="teal"
+          variant="outline"
+          onClick={() => navigate("/order")}
+        >
+          Proceed to Order
+        </Button>
+      </Flex>
       <Grid
         width={"80%"}
         margin={"auto"}
