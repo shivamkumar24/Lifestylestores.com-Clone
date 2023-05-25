@@ -7,11 +7,13 @@ import { Box, Button, Flex, Grid, Heading, useToast } from "@chakra-ui/react";
 const Cart = () => {
   const toast = useToast();
   const navigate = useNavigate();
+  const [total, setTotal] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [cartData, setCartData] = useState([]);
   const token = sessionStorage.getItem("user-token");
 
   const getCartData = async () => {
+    let amount = 0;
     try {
       const response = await axios.get(
         "https://calm-tutu-bass.cyclic.app/cart",
@@ -23,8 +25,11 @@ const Cart = () => {
       );
 
       const data1 = response.data.cartData;
+      data1.map((el) => (amount += el.price));
       console.log(data1);
+
       setCartData(data1);
+      setTotal(amount);
     } catch (error) {
       console.log("Cart Data fetching Error: ", error);
     }
@@ -72,6 +77,7 @@ const Cart = () => {
     <Box style={{ padding: "20px" }}>
       <Flex justifyContent={"space-around"}>
         <Heading>Cart Items: {cartData.length}</Heading>
+        <Heading>Total Amount: ₹ {total}</Heading>
         <Button
           colorScheme="teal"
           variant="outline"
