@@ -109,7 +109,7 @@ const AdminWomen = () => {
   };
 
   return (
-    <>
+    <div id="women">
       <Flex
         direction={"column"}
         alignItems={"center"}
@@ -282,7 +282,7 @@ const AdminWomen = () => {
           </TableContainer>
         </Stack>
       </Flex>
-    </>
+    </div>
   );
 };
 

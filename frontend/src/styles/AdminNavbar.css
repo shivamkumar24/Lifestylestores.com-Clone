@@ -1,0 +1,22 @@
+.mainAdminDiv {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(225, 75, 75);
+}
+
+.adminDiv {
+  color: aliceblue;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 5px 15px;
+  border: 1px solid white;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.adminDiv:hover {
+  color: rgb(225, 75, 75);
+  background-color: white;
+}

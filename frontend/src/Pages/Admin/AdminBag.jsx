@@ -109,7 +109,7 @@ const AdminBag = () => {
   };
 
   return (
-    <>
+    <div id="bag">
       <Flex
         direction={"column"}
         alignItems={"center"}
@@ -282,7 +282,7 @@ const AdminBag = () => {
           </TableContainer>
         </Stack>
       </Flex>
-    </>
+    </div>
   );
 };
 

@@ -137,126 +137,136 @@ const AdminAdmin = () => {
   };
 
   return (
-    <Flex direction={"column"} alignItems={"center"} justifyContent={"center"}>
-      <Stack spacing={8} w={{ base: "90%", md: "40%" }} py={12} px={6}>
-        <Stack align={"center"}>
-          <Heading fontSize={"4xl"} textAlign={"center"} color={"saddlebrown "}>
-            Add New Admin
-          </Heading>
+    <div id="admin">
+      <Flex
+        direction={"column"}
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
+        <Stack spacing={8} w={{ base: "90%", md: "40%" }} py={12} px={6}>
+          <Stack align={"center"}>
+            <Heading
+              fontSize={"4xl"}
+              textAlign={"center"}
+              color={"saddlebrown "}
+            >
+              Add New Admin
+            </Heading>
+          </Stack>
+
+          <Box
+            p={8}
+            rounded={"lg"}
+            bg={useColorModeValue("white", "gray.700")}
+            boxShadow={"lg"}
+          >
+            <Stack spacing={4}>
+              <FormControl id="firstName" isRequired>
+                <FormLabel>Name</FormLabel>
+                <Input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </FormControl>
+
+              <FormControl id="email" isRequired>
+                <FormLabel>Email</FormLabel>
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </FormControl>
+
+              <FormControl id="phone" isRequired>
+                <FormLabel>phone</FormLabel>
+                <Input
+                  type="number"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+              </FormControl>
+
+              <FormControl id="password" isRequired>
+                <FormLabel>Password</FormLabel>
+                <InputGroup>
+                  <Input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+
+                  <InputRightElement h={"full"}>
+                    <Button
+                      variant={"ghost"}
+                      onClick={() =>
+                        setShowPassword((showPassword) => !showPassword)
+                      }
+                    >
+                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+              </FormControl>
+
+              <Stack spacing={10} pt={2}>
+                <Button
+                  onClick={CallSignUpFunction}
+                  loadingText="Submitting"
+                  size="lg"
+                  bg={"#df9018"}
+                  color={"white"}
+                  _hover={{
+                    bg: "pink.500",
+                  }}
+                >
+                  Add Admin
+                </Button>
+              </Stack>
+            </Stack>
+          </Box>
         </Stack>
 
-        <Box
-          p={8}
-          rounded={"lg"}
-          bg={useColorModeValue("white", "gray.700")}
-          boxShadow={"lg"}
-        >
-          <Stack spacing={4}>
-            <FormControl id="firstName" isRequired>
-              <FormLabel>Name</FormLabel>
-              <Input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </FormControl>
-
-            <FormControl id="email" isRequired>
-              <FormLabel>Email</FormLabel>
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </FormControl>
-
-            <FormControl id="phone" isRequired>
-              <FormLabel>phone</FormLabel>
-              <Input
-                type="number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-            </FormControl>
-
-            <FormControl id="password" isRequired>
-              <FormLabel>Password</FormLabel>
-              <InputGroup>
-                <Input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-
-                <InputRightElement h={"full"}>
-                  <Button
-                    variant={"ghost"}
-                    onClick={() =>
-                      setShowPassword((showPassword) => !showPassword)
-                    }
-                  >
-                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-            </FormControl>
-
-            <Stack spacing={10} pt={2}>
-              <Button
-                onClick={CallSignUpFunction}
-                loadingText="Submitting"
-                size="lg"
-                bg={"#df9018"}
-                color={"white"}
-                _hover={{
-                  bg: "pink.500",
-                }}
-              >
-                Add Admin
-              </Button>
-            </Stack>
-          </Stack>
-        </Box>
-      </Stack>
-
-      <Stack w={"90%"}>
-        <TableContainer fontWeight={"bold"}>
-          <Table variant="striped" colorScheme="teal">
-            <Thead>
-              <Tr>
-                <Th>ID</Th>
-                <Th>Name</Th>
-                <Th>Email</Th>
-                <Th>Phone</Th>
-                <Th>Delete</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {adminData.map((el) => {
-                return (
-                  <Tr key={el._id}>
-                    <Td>{el._id}</Td>
-                    <Td>{el.name}</Td>
-                    <Td>{el.email}</Td>
-                    <Td>{el.phone}</Td>
-                    <Td>
-                      <Button
-                        color={"white"}
-                        bgColor={"red"}
-                        fontWeight={"bold"}
-                        onClick={() => deleteAdmin(el._id)}
-                      >
-                        Delete
-                      </Button>
-                    </Td>
-                  </Tr>
-                );
-              })}
-            </Tbody>
-          </Table>
-        </TableContainer>
-      </Stack>
-    </Flex>
+        <Stack w={"90%"}>
+          <TableContainer fontWeight={"bold"}>
+            <Table variant="striped" colorScheme="teal">
+              <Thead>
+                <Tr>
+                  <Th>ID</Th>
+                  <Th>Name</Th>
+                  <Th>Email</Th>
+                  <Th>Phone</Th>
+                  <Th>Delete</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {adminData.map((el) => {
+                  return (
+                    <Tr key={el._id}>
+                      <Td>{el._id}</Td>
+                      <Td>{el.name}</Td>
+                      <Td>{el.email}</Td>
+                      <Td>{el.phone}</Td>
+                      <Td>
+                        <Button
+                          color={"white"}
+                          bgColor={"red"}
+                          fontWeight={"bold"}
+                          onClick={() => deleteAdmin(el._id)}
+                        >
+                          Delete
+                        </Button>
+                      </Td>
+                    </Tr>
+                  );
+                })}
+              </Tbody>
+            </Table>
+          </TableContainer>
+        </Stack>
+      </Flex>
+    </div>
   );
 };
 
