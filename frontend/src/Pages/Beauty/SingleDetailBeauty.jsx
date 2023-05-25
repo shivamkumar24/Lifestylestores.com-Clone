@@ -17,6 +17,7 @@ import {
   ListItem,
   Grid,
   useToast,
+  Spinner,
 } from "@chakra-ui/react";
 import { MdLocalShipping } from "react-icons/md";
 
@@ -103,7 +104,14 @@ const SingleDetailBeauty = () => {
   return (
     <Box>
       {data === null ? (
-        <Heading>Loading ......</Heading>
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+          margin={"15px"}
+        />
       ) : (
         <Container maxW={"90%"}>
           <SimpleGrid

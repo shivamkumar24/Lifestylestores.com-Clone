@@ -1,7 +1,15 @@
 import axios from "axios";
 import Card from "../../Components/Card";
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Grid, Select, Button, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Grid,
+  Select,
+  Button,
+  Heading,
+  Spinner,
+} from "@chakra-ui/react";
 
 const Kid = () => {
   const [loaded, setLoaded] = useState(false);
@@ -50,7 +58,14 @@ const Kid = () => {
   return (
     <Box>
       {data === [] ? (
-        <Heading>Loading ......</Heading>
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+          margin={"15px"}
+        />
       ) : (
         <>
           <Flex margin={"10px auto 25px auto"}>
