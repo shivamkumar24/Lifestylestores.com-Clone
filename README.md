@@ -1,6 +1,6 @@
 <h1 align="center">Lifestylestores.com Clone</h1>
 
-<h3 align="center" id="title">unique name :- outfitstore.com</h3>
+<h3 align="center" id="title">Unique name :- outfitstore.com</h3>
 
 <h4 align="center">*** An Individual Project ***</h4>
 
@@ -41,7 +41,7 @@
 
 
 
-<h3 align="center"><a href="https://outfitstore-eta.vercel.app/"><strong>Want to see live preview »</strong></a></h3>
+<h3 align="center"><a href="https://outfitstore-eta.vercel.app/" target="_blank"><strong>Want to see live preview »</strong></a></h3>
 
 
 OutFit is an ECommerce Website & is a Clone of lifestylestore.com. With a vast collection of products of fashion and clothing, we offer a seamless shopping experience. Our user-friendly interface ensure a hassle-free shopping experience for our customers. Shop with us today and discover the convenience of online shopping!
