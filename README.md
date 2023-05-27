@@ -2,7 +2,7 @@
 
 <h3 align="center" id="title">unique name :- outfitstore.com</h3>
 
-<h5 align="center">* An Individual Project *</h5>
+<h4 align="center">*** An Individual Project ***</h4>
 
 <h3 align="center">It's a MERN Stack E-commerce web application with all the major functionalities</h3>
 
