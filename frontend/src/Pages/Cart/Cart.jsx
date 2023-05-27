@@ -75,15 +75,18 @@ const Cart = () => {
 
   return (
     <Box style={{ padding: "20px" }}>
-      <Flex justifyContent={"space-around"}>
+      <Flex
+        justifyContent={"space-around"}
+        flexDirection={{ base: "column", md: "row", lg: "row" }}
+      >
         <Heading>Cart Items: {cartData.length}</Heading>
         <Heading>Total Amount: ₹ {total}</Heading>
         <Button
           colorScheme="teal"
           variant="outline"
-          onClick={() => navigate("/order")}
+          onClick={() => navigate("/payment")}
         >
-          Proceed to Order
+          Proceed to Payment
         </Button>
       </Flex>
       <Grid
