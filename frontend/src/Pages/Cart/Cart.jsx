@@ -73,6 +73,18 @@ const Cart = () => {
       );
   };
 
+  const callPayment = () => {
+    if (cartData.length === 0) {
+      toast({
+        title: "Your Cart is Empty.",
+        status: "error",
+        isClosable: true,
+      });
+    } else {
+      navigate("/payment");
+    }
+  };
+
   return (
     <Box style={{ padding: "20px" }}>
       <Flex
@@ -81,11 +93,7 @@ const Cart = () => {
       >
         <Heading>Cart Items: {cartData.length}</Heading>
         <Heading>Total Amount: ₹ {total}</Heading>
-        <Button
-          colorScheme="teal"
-          variant="outline"
-          onClick={() => navigate("/payment")}
-        >
+        <Button colorScheme="teal" variant="outline" onClick={callPayment}>
           Proceed to Payment
         </Button>
       </Flex>
