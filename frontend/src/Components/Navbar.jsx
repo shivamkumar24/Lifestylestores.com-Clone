@@ -29,47 +29,55 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [loaded, setLoaded] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
-  // const [cartData, setCartData] = useState([]);
+  const [cartDataLength, setCartDataLength] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
+  const [userName, setUserName] = useState("User");
 
   const token = sessionStorage.getItem("user-token");
-  // const user = sessionStorage.getItem("user-details");
 
-  // const parsedUser = JSON.parse(user);
-  // const user_name = parsedUser.name;
+  const getUserData = () => {
+    if (token !== null) {
+      const user = sessionStorage.getItem("user-details");
+      const parsedUser = JSON.parse(user);
+      let user_name = parsedUser.name;
+      user_name = user_name.split(" ");
+      setUserName(user_name[0]);
+    }
+  };
 
-  // const getCartData = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       "https://calm-tutu-bass.cyclic.app/cart",
-  //       {
-  //         headers: {
-  //           Authorization: `${token}`,
-  //         },
-  //       }
-  //     );
-  //     const data1 = response.data.cartData;
-  //     setCartData(data1);
-  //   } catch (error) {
-  //     console.log("Error: ", error);
-  //   }
-  // };
+  const getCartData = async () => {
+    try {
+      const response = await axios.get(
+        "https://calm-tutu-bass.cyclic.app/cart",
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+      const data1 = response.data.cartData;
+      setCartDataLength(data1.length);
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
 
   useEffect(() => {
     token === null ? setIsAuth(false) : setIsAuth(true);
   }, [token]);
 
-  // useEffect(() => {
-  //   getCartData();
-  //   if (!loaded) {
-  //     setLoaded(true);
-  //     const pageRelaod = setTimeout(() => {
-  //       window.location.reload();
-  //     }, 100);
+  useEffect(() => {
+    getCartData();
+    getUserData();
+    if (!loaded) {
+      setLoaded(true);
+      const pageRelaod = setTimeout(() => {
+        window.location.reload();
+      }, 100);
 
-  //     clearTimeout(pageRelaod);
-  //   }
-  // }, []);
+      clearTimeout(pageRelaod);
+    }
+  }, []);
 
   const userLogout = () => {
     sessionStorage.clear();
@@ -182,10 +190,7 @@ const Navbar = () => {
 
             <MenuList>
               <MenuGroup title="Profile">
-                <MenuItem color="pink.400">
-                  {/* Hey,{isAuth === true ? `${user_name}` : "User"} */}
-                  Hey, User
-                </MenuItem>
+                <MenuItem color="pink.400">Hey, {userName}</MenuItem>
                 <MenuItem>My Account</MenuItem>
                 <MenuItem>Order History</MenuItem>
                 <MenuItem>My Address</MenuItem>
@@ -253,8 +258,7 @@ const Navbar = () => {
               borderRadius={"50%"}
               bg="#d53f8c"
             >
-              {/* <Text> {cartItems.length}</Text> */}
-              <Text>0</Text>
+              <Text>{cartDataLength}</Text>
             </Box>
           </Flex>
         </Link>

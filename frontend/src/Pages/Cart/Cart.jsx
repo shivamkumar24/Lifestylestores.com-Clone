@@ -2,7 +2,16 @@ import axios from "axios";
 import Card from "../../Components/Card";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { Box, Button, Flex, Grid, Heading, useToast } from "@chakra-ui/react";
+import CartGif from "../../Assets/CartGif.gif";
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  Heading,
+  Image,
+  useToast,
+} from "@chakra-ui/react";
 
 const Cart = () => {
   const toast = useToast();
@@ -85,48 +94,75 @@ const Cart = () => {
     }
   };
 
-  return (
-    <Box style={{ padding: "20px" }}>
-      <Flex
-        justifyContent={"space-around"}
-        flexDirection={{ base: "column", md: "row", lg: "row" }}
-      >
-        <Heading>Cart Items: {cartData.length}</Heading>
-        <Heading>Total Amount: ₹ {total}</Heading>
-        <Button colorScheme="teal" variant="outline" onClick={callPayment}>
-          Proceed to Payment
-        </Button>
-      </Flex>
-      <Grid
-        width={"80%"}
-        margin={"auto"}
-        justifyContent="space-between"
-        gridTemplateColumns={{
-          base: "repeat(1,1fr)",
-          sm: "repeat(2,1fr)",
-          md: "repeat(3,1fr)",
-          lg: "repeat(4,1fr)",
-        }}
-        columnGap="20px"
-      >
-        {cartData.map((el) => (
-          <Flex flexDirection={"column"} key={el._id}>
-            <Card key={el._id} {...el} type={"bag"} />
-            <Button
-              onClick={() => handleDelete(el)}
-              marginLeft={"22px"}
-              bgColor={"red.700"}
-              color={"whitesmoke"}
-              fontWeight={"bold"}
-              cursor={"pointer"}
-            >
-              Delete
-            </Button>
-          </Flex>
-        ))}
-      </Grid>
-    </Box>
-  );
+  if (cartData.length === 0) {
+    return (
+      <Box style={{ padding: "20px" }}>
+        <Flex
+          justifyContent={"space-around"}
+          flexDirection={{ base: "column", md: "row", lg: "row" }}
+        >
+          <Heading>Cart Items: {cartData.length}</Heading>
+          <Heading>Total Amount: ₹ {total}</Heading>
+          <Button colorScheme="teal" variant="outline" onClick={callPayment}>
+            Proceed to Payment
+          </Button>
+        </Flex>
+        <Box margin={{ base: "12px", md: "25px" }}>
+          <Image
+            src={CartGif}
+            alt="Empty-Cart"
+            display={"block"}
+            margin={"auto"}
+            height={"auto"}
+            width={{ base: "90%", md: "50%" }}
+          />
+        </Box>
+      </Box>
+    );
+  } else {
+    return (
+      <Box style={{ padding: "20px" }}>
+        <Flex
+          justifyContent={"space-around"}
+          flexDirection={{ base: "column", md: "row", lg: "row" }}
+        >
+          <Heading>Cart Items: {cartData.length}</Heading>
+          <Heading>Total Amount: ₹ {total}</Heading>
+          <Button colorScheme="teal" variant="outline" onClick={callPayment}>
+            Proceed to Payment
+          </Button>
+        </Flex>
+        <Grid
+          width={"80%"}
+          margin={"auto"}
+          justifyContent="space-between"
+          gridTemplateColumns={{
+            base: "repeat(1,1fr)",
+            sm: "repeat(2,1fr)",
+            md: "repeat(3,1fr)",
+            lg: "repeat(4,1fr)",
+          }}
+          columnGap="20px"
+        >
+          {cartData.map((el) => (
+            <Flex flexDirection={"column"} key={el._id}>
+              <Card key={el._id} {...el} type={"bag"} />
+              <Button
+                onClick={() => handleDelete(el)}
+                marginLeft={"22px"}
+                bgColor={"red.700"}
+                color={"whitesmoke"}
+                fontWeight={"bold"}
+                cursor={"pointer"}
+              >
+                Delete
+              </Button>
+            </Flex>
+          ))}
+        </Grid>
+      </Box>
+    );
+  }
 };
 
 export default Cart;
