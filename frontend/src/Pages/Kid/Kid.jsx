@@ -5,10 +5,10 @@ import {
   Box,
   Flex,
   Grid,
+  Stack,
   Select,
   Button,
-  Heading,
-  Spinner,
+  Skeleton,
 } from "@chakra-ui/react";
 
 const Kid = () => {
@@ -57,15 +57,12 @@ const Kid = () => {
 
   return (
     <Box>
-      {data === [] ? (
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-          margin={"15px"}
-        />
+      {data.length === 0 ? (
+        <Stack>
+          <Skeleton height="100px" />
+          <Skeleton height="110px" />
+          <Skeleton height="125px" />
+        </Stack>
       ) : (
         <>
           <Flex margin={"10px auto 25px auto"}>

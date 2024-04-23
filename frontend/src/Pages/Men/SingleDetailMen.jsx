@@ -4,20 +4,20 @@ import { useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import {
   Box,
-  Container,
-  Stack,
   Text,
+  List,
+  Grid,
   Image,
+  Stack,
   VStack,
   Button,
   Heading,
+  useToast,
+  Skeleton,
+  ListItem,
+  Container,
   SimpleGrid,
   StackDivider,
-  List,
-  ListItem,
-  Grid,
-  useToast,
-  Spinner,
 } from "@chakra-ui/react";
 import { MdLocalShipping } from "react-icons/md";
 
@@ -104,14 +104,11 @@ const SingleDetailMen = () => {
   return (
     <Box>
       {data === null ? (
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-          margin={"15px"}
-        />
+        <Stack>
+          <Skeleton height="100px" />
+          <Skeleton height="110px" />
+          <Skeleton height="125px" />
+        </Stack>
       ) : (
         <Container maxW={"90%"}>
           <SimpleGrid
