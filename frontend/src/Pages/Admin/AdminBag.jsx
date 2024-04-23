@@ -60,11 +60,13 @@ const AdminBag = () => {
     axios
       .delete(`https://calm-tutu-bass.cyclic.app/bag/delete/${id}`)
       .then((res) => {
-        toast({
-          title: res.data.msg,
-          status: "success",
-          isClosable: true,
-        });
+        if (res.data) {
+          toast({
+            title: res.data.msg,
+            status: "success",
+            isClosable: true,
+          });
+        }
       })
       .catch((e) =>
         toast({
@@ -93,11 +95,13 @@ const AdminBag = () => {
     axios
       .post(`https://calm-tutu-bass.cyclic.app/bag/add`, NewBagData)
       .then((res) => {
-        toast({
-          title: res.data.msg,
-          status: "success",
-          isClosable: true,
-        });
+        if (res.data) {
+          toast({
+            title: res.data.msg,
+            status: "success",
+            isClosable: true,
+          });
+        }
       })
       .catch((e) =>
         toast({

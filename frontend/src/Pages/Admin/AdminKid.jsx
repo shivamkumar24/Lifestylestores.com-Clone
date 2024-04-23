@@ -60,11 +60,13 @@ const AdminKid = () => {
     axios
       .delete(`https://calm-tutu-bass.cyclic.app/kid/delete/${id}`)
       .then((res) => {
-        toast({
-          title: res.data.msg,
-          status: "success",
-          isClosable: true,
-        });
+        if (res.data) {
+          toast({
+            title: res.data.msg,
+            status: "success",
+            isClosable: true,
+          });
+        }
       })
       .catch((e) =>
         toast({
@@ -93,11 +95,13 @@ const AdminKid = () => {
     axios
       .post(`https://calm-tutu-bass.cyclic.app/kid/add`, NewKidData)
       .then((res) => {
-        toast({
-          title: res.data.msg,
-          status: "success",
-          isClosable: true,
-        });
+        if (res.data) {
+          toast({
+            title: res.data.msg,
+            status: "success",
+            isClosable: true,
+          });
+        }
       })
       .catch((e) =>
         toast({

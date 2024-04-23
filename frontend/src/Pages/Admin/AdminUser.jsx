@@ -59,11 +59,13 @@ const AdminUser = () => {
     axios
       .delete(`https://calm-tutu-bass.cyclic.app/user/delete/${id}`)
       .then((res) => {
-        toast({
-          title: res.data.msg,
-          status: "success",
-          isClosable: true,
-        });
+        if (res.data) {
+          toast({
+            title: res.data.msg,
+            status: "success",
+            isClosable: true,
+          });
+        }
       })
       .catch((e) =>
         toast({
@@ -88,11 +90,13 @@ const AdminUser = () => {
     axios
       .post(`https://calm-tutu-bass.cyclic.app/user/register`, NewUserData)
       .then((res) => {
-        toast({
-          title: res.data.msg,
-          status: "success",
-          isClosable: true,
-        });
+        if (res.data) {
+          toast({
+            title: res.data.msg,
+            status: "success",
+            isClosable: true,
+          });
+        }
       })
       .catch((e) =>
         toast({

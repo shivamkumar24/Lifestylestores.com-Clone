@@ -60,11 +60,13 @@ const AdminBeauty = () => {
     axios
       .delete(`https://calm-tutu-bass.cyclic.app/beauty/delete/${id}`)
       .then((res) => {
-        toast({
-          title: res.data.msg,
-          status: "success",
-          isClosable: true,
-        });
+        if (res.data) {
+          toast({
+            title: res.data.msg,
+            status: "success",
+            isClosable: true,
+          });
+        }
       })
       .catch((e) =>
         toast({
@@ -93,11 +95,13 @@ const AdminBeauty = () => {
     axios
       .post(`https://calm-tutu-bass.cyclic.app/beauty/add`, NewBeautyData)
       .then((res) => {
-        toast({
-          title: res.data.msg,
-          status: "success",
-          isClosable: true,
-        });
+        if (res.data) {
+          toast({
+            title: res.data.msg,
+            status: "success",
+            isClosable: true,
+          });
+        }
       })
       .catch((e) =>
         toast({

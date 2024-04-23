@@ -41,12 +41,14 @@ const SignUp = () => {
     axios
       .post(`https://calm-tutu-bass.cyclic.app/user/register`, SignupData)
       .then((res) => {
-        toast({
-          title: res.data.msg,
-          status: "success",
-          isClosable: true,
-        });
-        navigate("/login");
+        if (res.data) {
+          toast({
+            title: res.data.msg,
+            status: "success",
+            isClosable: true,
+          });
+          navigate("/login");
+        }
       })
       .catch((e) =>
         toast({

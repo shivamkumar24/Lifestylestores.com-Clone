@@ -34,16 +34,17 @@ const AdminLogin = () => {
     axios
       .post(`https://calm-tutu-bass.cyclic.app/admin/login`, AdminLoginData)
       .then((res) => {
-        console.log(res);
-        toast({
-          title: res.data.msg,
-          status: "success",
-          isClosable: true,
-        });
-        localStorage.setItem("admin-token", res.data.token);
-        localStorage.setItem("admin-details", JSON.stringify(res.data.admin));
-        navigate("/admin");
-        window.location.reload();
+        if (res.data) {
+          toast({
+            title: res.data.msg,
+            status: "success",
+            isClosable: true,
+          });
+          localStorage.setItem("admin-token", res.data.token);
+          localStorage.setItem("admin-details", JSON.stringify(res.data.admin));
+          navigate("/admin");
+          window.location.reload();
+        }
       })
       .catch((e) =>
         toast({

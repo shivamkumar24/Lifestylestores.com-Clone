@@ -35,18 +35,19 @@ const Login = () => {
     axios
       .post(`https://calm-tutu-bass.cyclic.app/user/login`, LoginData)
       .then((res) => {
-        console.log(res);
-        toast({
-          title: res.data.msg,
-          status: "success",
-          isClosable: true,
-        });
-        let userData = res.data.user;
-        localStorage.setItem("user-token", res.data.token);
-        localStorage.setItem("userID", userData._id);
-        localStorage.setItem("user-details", JSON.stringify(res.data.user));
-        navigate("/");
-        window.location.reload();
+        if (res.data) {
+          toast({
+            title: res.data.msg,
+            status: "success",
+            isClosable: true,
+          });
+          let userData = res.data.user;
+          localStorage.setItem("user-token", res.data.token);
+          localStorage.setItem("userID", userData._id);
+          localStorage.setItem("user-details", JSON.stringify(res.data.user));
+          navigate("/");
+          window.location.reload();
+        }
       })
       .catch((e) =>
         toast({

@@ -85,11 +85,13 @@ const SingleDetailShoes = () => {
           },
         })
         .then((res) => {
-          toast({
-            title: res.data.msg,
-            status: "success",
-            isClosable: true,
-          });
+          if (res.data) {
+            toast({
+              title: res.data.msg,
+              status: "success",
+              isClosable: true,
+            });
+          }
         })
         .catch((e) =>
           toast({
