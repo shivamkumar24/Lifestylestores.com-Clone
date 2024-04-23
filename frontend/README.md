@@ -34,9 +34,9 @@
   <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="vercerl">
 </p>
 
-<h3 align="center"><a href="https://outfitstore-eta.vercel.app/" target="_blank"><strong>Want to see live preview »</strong></a></h3>
+<h3 align="center"><a href="https://lifestylestores-com-clone.vercel.app/" target="_blank"><strong>Want to see live preview »</strong></a></h3>
 
-The outfit is an ECommerce Website & is a Clone of lifestylestore.com. With a vast collection of fashion and clothing products, we offer a seamless shopping experience. Our user-friendly interface ensures a hassle-free shopping experience for our customers. Shop with us today and discover the convenience of online shopping!
+The outfit is an e-commerce website & is a Clone of lifestylestore.com. With a vast collection of fashion and clothing products, we offer a seamless shopping experience. Our user-friendly interface ensures a hassle-free shopping experience for our customers. Shop with us today and discover the convenience of online shopping!
 
 <br />
 
@@ -46,7 +46,7 @@ The outfit is an ECommerce Website & is a Clone of lifestylestore.com. With a va
 - Women Page
 - Men Page
 - Kids Page
-- Shoes Page
+- Shoe Page
 - Beauty Page
 - Product Details Page
 - Login Page
@@ -60,8 +60,8 @@ The outfit is an ECommerce Website & is a Clone of lifestylestore.com. With a va
 ## 🚀 Features
 
 - Login and Signup User Account
-- JWT (Json Web Token) Authentication and BcryptJS Password Hashing
-- All category Add and Remove Items
+- JWT (JSON Web Token) Authentication and BcryptJS Password Hashing
+- All Category Add and Remove Items
 - Admin Update Record
 - Add to Cart
 - Payment
@@ -113,7 +113,7 @@ The outfit is an ECommerce Website & is a Clone of lifestylestore.com. With a va
  
 ## Getting Started
 
-This project was built using React, Chakra UI, HTML, CSS, JavaScript, Rest API, Node JS, Express and MongoDB with JWT Authentication. It is an e-commerce web application and for running on your local environment you should follow these guidelines.
+This project was built using React, Chakra UI, HTML, CSS, JavaScript, Rest API, Node JS, Express, and MongoDB with JWT Authentication. It is an e-commerce web application and for running on your local environment you should follow these guidelines.
 
 ### Prerequisites
 
