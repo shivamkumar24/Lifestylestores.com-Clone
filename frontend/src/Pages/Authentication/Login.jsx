@@ -42,9 +42,9 @@ const Login = () => {
           isClosable: true,
         });
         let userData = res.data.user;
-        sessionStorage.setItem("user-token", res.data.token);
-        sessionStorage.setItem("userID", userData._id);
-        sessionStorage.setItem("user-details", JSON.stringify(res.data.user));
+        localStorage.setItem("user-token", res.data.token);
+        localStorage.setItem("userID", userData._id);
+        localStorage.setItem("user-details", JSON.stringify(res.data.user));
         navigate("/");
         window.location.reload();
       })
@@ -65,7 +65,7 @@ const Login = () => {
         isClosable: true,
       });
     } else {
-      sessionStorage.setItem("loginuser", JSON.stringify(LoginData));
+      localStorage.setItem("loginuser", JSON.stringify(LoginData));
     }
   };
 

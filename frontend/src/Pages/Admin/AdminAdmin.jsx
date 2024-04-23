@@ -127,7 +127,7 @@ const AdminAdmin = () => {
         isClosable: true,
       });
     } else {
-      sessionStorage.setItem("signupuser", JSON.stringify(NewAdminData));
+      localStorage.setItem("signupuser", JSON.stringify(NewAdminData));
     }
   };
 

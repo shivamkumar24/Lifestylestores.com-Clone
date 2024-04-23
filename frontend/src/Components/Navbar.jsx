@@ -33,11 +33,11 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [userName, setUserName] = useState("User");
 
-  const token = sessionStorage.getItem("user-token");
+  const token = localStorage.getItem("user-token");
 
   const getUserData = () => {
     if (token !== null) {
-      const user = sessionStorage.getItem("user-details");
+      const user = localStorage.getItem("user-details");
       const parsedUser = JSON.parse(user);
       let user_name = parsedUser.name;
       user_name = user_name.split(" ");
@@ -80,7 +80,7 @@ const Navbar = () => {
   }, []);
 
   const userLogout = () => {
-    sessionStorage.clear();
+    localStorage.clear();
     window.location.reload();
   };
 

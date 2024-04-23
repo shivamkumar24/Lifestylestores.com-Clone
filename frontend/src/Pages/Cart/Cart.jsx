@@ -19,7 +19,7 @@ const Cart = () => {
   const [total, setTotal] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [cartData, setCartData] = useState([]);
-  const token = sessionStorage.getItem("user-token");
+  const token = localStorage.getItem("user-token");
 
   const getCartData = async () => {
     let amount = 0;

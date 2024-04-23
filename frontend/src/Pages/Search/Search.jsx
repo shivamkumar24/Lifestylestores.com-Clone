@@ -27,8 +27,8 @@ const Search = () => {
   const [data, setData] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [totaldata, setTotalData] = useState([]);
-  const userID = sessionStorage.getItem("userID");
-  const token = sessionStorage.getItem("user-token");
+  const userID = localStorage.getItem("userID");
+  const token = localStorage.getItem("user-token");
 
   console.log(query);
 
