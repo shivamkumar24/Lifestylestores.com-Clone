@@ -38,10 +38,10 @@ The API is currently deployed at: https://calm-tutu-bass.cyclic.app/
 
    1. Get User
 
-   - Endpoint: `/user`
-   - Method: `GET`
-   - Description: Fetches all the user entries from the backend.
-   - Response: An array of users objects.
+      - Endpoint: `/user`
+      - Method: `GET`
+      - Description: Fetches all the user entries from the backend.
+      - Response: An array of users objects.
 
    2. Register User
 
