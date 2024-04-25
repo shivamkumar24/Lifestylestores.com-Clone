@@ -52,7 +52,7 @@ const SingleDetailWomen = () => {
     getData();
   }, []);
 
-  console.log("SingleWomenData: ", data);
+  console.log("SingleWomenData: ", id, data);
 
   // --------------------- data added to cart --------------------------
   const handleCartAdd = (el) => {
