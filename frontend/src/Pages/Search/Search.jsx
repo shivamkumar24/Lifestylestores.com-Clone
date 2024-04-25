@@ -107,7 +107,7 @@ const Search = () => {
     searchProductData();
   }, []);
 
-  console.log(data);
+  console.log("SearchData: ", data);
 
   return (
     <Box>

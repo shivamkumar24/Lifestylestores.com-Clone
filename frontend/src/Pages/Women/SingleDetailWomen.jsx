@@ -2,8 +2,8 @@ import {
   Box,
   Grid,
   List,
-  Stack,
   Text,
+  Stack,
   Image,
   VStack,
   Button,
@@ -24,35 +24,36 @@ import { MdLocalShipping } from "react-icons/md";
 const SingleDetailWomen = () => {
   const { id } = useParams();
   const toast = useToast();
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const userID = localStorage.getItem("userID");
   const token = localStorage.getItem("user-token");
 
-  const getData = async () => {
-    try {
-      const response = await axios.get(
-        `https://calm-tutu-bass.cyclic.app/women/${id}`
-      );
-      const data1 = response.data.women;
-      setData(data1);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.log("Error: ", error);
-      toast({
-        title: "Error fetching product details",
-        status: "error",
-        isClosable: true,
-      });
-    }
-  };
-
   useEffect(() => {
-    getData();
-  }, []);
+    const getData = async (id) => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          `https://calm-tutu-bass.cyclic.app/women/${id}`
+        );
+        const data1 = response.data.women;
+        setData(data1);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.log("Error: ", error);
+        toast({
+          title: "Error fetching product details",
+          status: "error",
+          isClosable: true,
+        });
+      }
+    };
 
-  console.log("SingleWomenData: ", id, data);
+    getData(id);
+  }, [id]);
+
+  console.log("SingleWomenData: ", data);
 
   // --------------------- data added to cart --------------------------
   const handleCartAdd = (el) => {

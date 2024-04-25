@@ -26,6 +26,7 @@ const Cart = () => {
   const getCartData = async () => {
     let amount = 0;
     try {
+      setLoading(true);
       const response = await axios.get(
         "https://calm-tutu-bass.cyclic.app/cart",
         {

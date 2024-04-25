@@ -24,33 +24,34 @@ import { MdLocalShipping } from "react-icons/md";
 const SingleDetailKid = () => {
   const { id } = useParams();
   const toast = useToast();
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const userID = localStorage.getItem("userID");
   const token = localStorage.getItem("user-token");
 
-  const getData = async () => {
-    try {
-      const response = await axios.get(
-        `https://calm-tutu-bass.cyclic.app/kid/${id}`
-      );
-      const data1 = response.data.kids;
-      setData(data1);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.log("Error: ", error);
-      toast({
-        title: "Error fetching product details",
-        status: "error",
-        isClosable: true,
-      });
-    }
-  };
-
   useEffect(() => {
-    getData();
-  }, []);
+    const getData = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          `https://calm-tutu-bass.cyclic.app/kid/${id}`
+        );
+        const data1 = response.data.kids;
+        setData(data1);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.log("Error: ", error);
+        toast({
+          title: "Error fetching product details",
+          status: "error",
+          isClosable: true,
+        });
+      }
+    };
+
+    getData(id);
+  }, [id]);
 
   console.log("SingleKidData: ", data);
 
