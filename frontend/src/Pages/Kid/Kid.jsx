@@ -1,6 +1,3 @@
-import axios from "axios";
-import Card from "../../Components/Card";
-import React, { useEffect, useState } from "react";
 import {
   Box,
   Flex,
@@ -9,10 +6,14 @@ import {
   Select,
   Button,
   Skeleton,
+  useToast,
 } from "@chakra-ui/react";
+import axios from "axios";
+import Card from "../../Components/Card";
+import React, { useEffect, useState } from "react";
 
 const Kid = () => {
-  const [loaded, setLoaded] = useState(false);
+  const toast = useToast();
   const [data, setData] = useState([]);
   const [sort, setSort] = useState("price");
   const [order, setOrder] = useState("asc");
@@ -28,6 +29,11 @@ const Kid = () => {
       setData(data1);
     } catch (error) {
       console.log("Error: ", error);
+      toast({
+        title: "Error fetching product data",
+        status: "error",
+        isClosable: true,
+      });
     }
   };
 
@@ -43,15 +49,7 @@ const Kid = () => {
 
   useEffect(() => {
     getData(page, sort, order, category);
-    if (!loaded) {
-      setLoaded(true);
-      const pageRelaod = setTimeout(() => {
-        window.location.reload();
-      }, 100);
-
-      clearTimeout(pageRelaod);
-    }
-  }, [page, sort, order, category, loaded]);
+  }, [page, sort, order, category]);
 
   console.log(data);
 

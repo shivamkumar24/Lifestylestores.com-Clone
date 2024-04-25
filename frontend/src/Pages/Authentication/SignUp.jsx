@@ -14,13 +14,15 @@ import {
   InputRightElement,
   useColorModeValue,
 } from "@chakra-ui/react";
-import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { useSelector, useDispatch } from "react-redux";
+import { userSignUp } from "../../Redux/Auth/auth.action";
 
 const SignUp = () => {
   const toast = useToast();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,6 +30,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const { user, isError } = useSelector((store) => store.auth);
 
   const SignupData = {
     name: name,
@@ -35,28 +38,6 @@ const SignUp = () => {
     phone: Number(phone),
     password: password,
     address: address,
-  };
-
-  const AddNewUser = () => {
-    axios
-      .post(`https://calm-tutu-bass.cyclic.app/user/register`, SignupData)
-      .then((res) => {
-        if (res.data) {
-          toast({
-            title: res.data.msg,
-            status: "success",
-            isClosable: true,
-          });
-          navigate("/login");
-        }
-      })
-      .catch((e) =>
-        toast({
-          title: e.message,
-          status: "error",
-          isClosable: true,
-        })
-      );
   };
 
   const handleUserSignupForm = () => {
@@ -73,26 +54,39 @@ const SignUp = () => {
         status: "warning",
         isClosable: true,
       });
-    } else if (SignupData.phone.length !== 10) {
+    } else if (SignupData.phone.length!==10) {
       toast({
         title: "Please fill valid phone number",
         status: "warning",
         isClosable: true,
       });
-    } else if (!SignupData.email.match(mailformat)) {
+    }else if (!SignupData.email.match(mailformat)) {
       toast({
         title: "Please fill valid email address",
         status: "warning",
         isClosable: true,
       });
     } else {
-      localStorage.setItem("signupuser", JSON.stringify(SignupData));
+      dispatch(userSignUp(SignupData));
+      checkUserDatastatus();
     }
   };
 
-  const CallSignUpFunction = () => {
-    AddNewUser();
-    handleUserSignupForm();
+  const checkUserDatastatus = () => {
+    if (user !== null) {
+      toast({
+        title: user,
+        status: "success",
+        isClosable: true,
+      });
+      navigate("/login");
+    } else if (isError) {
+      toast({
+        title: "Something wrong",
+        status: "error",
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -187,7 +181,7 @@ const SignUp = () => {
 
               <Stack spacing={10} pt={2}>
                 <Button
-                  onClick={CallSignUpFunction}
+                  onClick={handleUserSignupForm}
                   loadingText="Submitting"
                   size="lg"
                   bg={"#df9018"}

@@ -47,8 +47,6 @@ const AdminShoes = () => {
     }
   };
 
-  console.log(shoesData);
-
   useEffect(() => {
     getShoes();
   }, []);
@@ -75,7 +73,7 @@ const AdminShoes = () => {
           isClosable: true,
         })
       );
-    window.location.reload();
+    getShoes();
   };
 
   // ----------------------- Add New Shoes -------------------

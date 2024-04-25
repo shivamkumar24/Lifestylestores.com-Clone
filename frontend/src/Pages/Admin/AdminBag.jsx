@@ -47,8 +47,6 @@ const AdminBag = () => {
     }
   };
 
-  console.log(bagData);
-
   useEffect(() => {
     getBag();
   }, []);
@@ -75,7 +73,7 @@ const AdminBag = () => {
           isClosable: true,
         })
       );
-    window.location.reload();
+    getBag();
   };
 
   // ----------------------- Add New Bag -------------------

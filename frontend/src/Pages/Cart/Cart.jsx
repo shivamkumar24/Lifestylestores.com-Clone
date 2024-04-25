@@ -1,24 +1,26 @@
+import {
+  Box,
+  Flex,
+  Grid,
+  Image,
+  Stack,
+  Button,
+  Heading,
+  Skeleton,
+  useToast,
+} from "@chakra-ui/react";
 import axios from "axios";
 import Card from "../../Components/Card";
 import { useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
 import CartGif from "../../Assets/CartGif.gif";
-import {
-  Box,
-  Button,
-  Flex,
-  Grid,
-  Heading,
-  Image,
-  useToast,
-} from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
 
 const Cart = () => {
   const toast = useToast();
   const navigate = useNavigate();
   const [total, setTotal] = useState(null);
-  const [loaded, setLoaded] = useState(false);
   const [cartData, setCartData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("user-token");
 
   const getCartData = async () => {
@@ -35,25 +37,22 @@ const Cart = () => {
 
       const data1 = response.data.cartData;
       data1.map((el) => (amount += el.price));
-      console.log(data1);
-
       setCartData(data1);
       setTotal(amount);
+      setLoading(false);
     } catch (error) {
-      console.log("Cart Data fetching Error: ", error);
+      setLoading(false);
+      console.log("Error: ", error);
+      toast({
+        title: "Error fetching product details",
+        status: "error",
+        isClosable: true,
+      });
     }
   };
 
   useEffect(() => {
     getCartData();
-    if (!loaded) {
-      setLoaded(true);
-      const pageRelaod = setTimeout(() => {
-        window.location.reload();
-      }, 100);
-
-      clearTimeout(pageRelaod);
-    }
   }, []);
 
   // ---------------------- Delete cart item -----------------------
@@ -94,7 +93,13 @@ const Cart = () => {
     }
   };
 
-  if (cartData.length === 0) {
+  if (loading) {
+    <Stack>
+      <Skeleton height="100px" />
+      <Skeleton height="110px" />
+      <Skeleton height="125px" />
+    </Stack>;
+  } else if (cartData.length === 0) {
     return (
       <Box style={{ padding: "20px" }}>
         <Flex

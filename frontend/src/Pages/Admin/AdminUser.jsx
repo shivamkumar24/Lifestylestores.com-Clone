@@ -46,8 +46,6 @@ const AdminUser = () => {
     }
   };
 
-  console.log(userData);
-
   useEffect(() => {
     getUser();
   }, []);
@@ -74,7 +72,7 @@ const AdminUser = () => {
           isClosable: true,
         })
       );
-    window.location.reload();
+    getUser();
   };
 
   // ----------------------- Add New Admin -------------------

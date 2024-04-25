@@ -47,8 +47,6 @@ const AdminWomen = () => {
     }
   };
 
-  console.log(womenData);
-
   useEffect(() => {
     getWomen();
   }, []);
@@ -75,7 +73,7 @@ const AdminWomen = () => {
           isClosable: true,
         })
       );
-    window.location.reload();
+    getWomen();
   };
 
   // ----------------------- Add New Women -------------------

@@ -1,7 +1,3 @@
-import axios from "axios";
-import "../../styles/SingleCard.css";
-import { useParams } from "react-router-dom";
-import React, { useState, useEffect } from "react";
 import {
   Box,
   Text,
@@ -19,13 +15,17 @@ import {
   SimpleGrid,
   StackDivider,
 } from "@chakra-ui/react";
+import axios from "axios";
+import "../../styles/SingleCard.css";
+import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { MdLocalShipping } from "react-icons/md";
 
 const SingleDetailBag = () => {
   const { id } = useParams();
   const toast = useToast();
   const [data, setData] = useState(null);
-  const [loaded, setLoaded] = useState(false);
+  const [loading, setLoading] = useState(true);
   const userID = localStorage.getItem("userID");
   const token = localStorage.getItem("user-token");
 
@@ -36,24 +36,23 @@ const SingleDetailBag = () => {
       );
       const data1 = response.data.bags;
       setData(data1);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log("Error: ", error);
+      toast({
+        title: "Error fetching product details",
+        status: "error",
+        isClosable: true,
+      });
     }
   };
 
   useEffect(() => {
     getData();
-    if (!loaded) {
-      setLoaded(true);
-      const pageRelaod = setTimeout(() => {
-        window.location.reload();
-      }, 100);
+  }, []);
 
-      clearTimeout(pageRelaod);
-    }
-  }, [loaded]);
-
-  console.log(data);
+  console.log("SingleBagData: ", data);
 
   // --------------------- data added to cart --------------------------
   const handleCartAdd = (el) => {
@@ -105,7 +104,7 @@ const SingleDetailBag = () => {
 
   return (
     <Box>
-      {data === null ? (
+      {loading ? (
         <Stack>
           <Skeleton height="100px" />
           <Skeleton height="110px" />

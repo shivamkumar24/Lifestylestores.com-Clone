@@ -13,49 +13,28 @@ import {
   InputRightElement,
   useColorModeValue,
 } from "@chakra-ui/react";
-import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { useSelector, useDispatch } from "react-redux";
+import { adminLogin } from "../../Redux/Auth/auth.action";
 
 const AdminLogin = () => {
   const toast = useToast();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const { admin, isError } = useSelector((store) => store.auth);
 
   const AdminLoginData = {
     email: email,
     password: password,
   };
 
-  const CheckAdmin = () => {
-    axios
-      .post(`https://calm-tutu-bass.cyclic.app/admin/login`, AdminLoginData)
-      .then((res) => {
-        if (res.data) {
-          toast({
-            title: res.data.msg,
-            status: "success",
-            isClosable: true,
-          });
-          localStorage.setItem("admin-token", res.data.token);
-          localStorage.setItem("admin-details", JSON.stringify(res.data.admin));
-          navigate("/admin");
-          window.location.reload();
-        }
-      })
-      .catch((e) =>
-        toast({
-          title: "Invalid Credentials",
-          status: "error",
-          isClosable: true,
-        })
-      );
-  };
-
   const handleAdminLoginForm = () => {
+    localStorage.clear();
     if (AdminLoginData.email === "" || AdminLoginData.password === "") {
       toast({
         title: "Please fill all information",
@@ -63,13 +42,29 @@ const AdminLogin = () => {
         isClosable: true,
       });
     } else {
-      localStorage.setItem("loginuser", JSON.stringify(AdminLoginData));
+      dispatch(adminLogin(AdminLoginData));
+      checkUserDatastatus();
     }
   };
 
-  const CallAdminLoginFunction = () => {
-    CheckAdmin();
-    handleAdminLoginForm();
+  const checkUserDatastatus = () => {
+    if (admin !== null) {
+      toast({
+        title: admin.msg,
+        status: "success",
+        isClosable: true,
+      });
+      localStorage.setItem("admin-token", admin.token);
+      localStorage.setItem("admin-details", JSON.stringify(admin.admin));
+      navigate("/admin");
+      window.location.reload();
+    } else if (isError) {
+      toast({
+        title: "Invalid Credentials",
+        status: "error",
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -137,7 +132,7 @@ const AdminLogin = () => {
 
               <Stack spacing={10} pt={2}>
                 <Button
-                  onClick={CallAdminLoginFunction}
+                  onClick={handleAdminLoginForm}
                   loadingText="Submitting"
                   size="lg"
                   bg={"#df9018"}

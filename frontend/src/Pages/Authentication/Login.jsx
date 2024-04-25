@@ -14,48 +14,24 @@ import {
   InputRightElement,
   useColorModeValue,
 } from "@chakra-ui/react";
-import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { useSelector, useDispatch } from "react-redux";
+import { userLogin } from "../../Redux/Auth/auth.action";
 
 const Login = () => {
   const toast = useToast();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const { user, isError } = useSelector((store) => store.auth);
 
   const LoginData = {
     email: email,
     password: password,
-  };
-
-  const CheckUser = () => {
-    axios
-      .post(`https://calm-tutu-bass.cyclic.app/user/login`, LoginData)
-      .then((res) => {
-        if (res.data) {
-          toast({
-            title: res.data.msg,
-            status: "success",
-            isClosable: true,
-          });
-          let userData = res.data.user;
-          localStorage.setItem("user-token", res.data.token);
-          localStorage.setItem("userID", userData._id);
-          localStorage.setItem("user-details", JSON.stringify(res.data.user));
-          navigate("/");
-          window.location.reload();
-        }
-      })
-      .catch((e) =>
-        toast({
-          title: "Invalid Credentials",
-          status: "error",
-          isClosable: true,
-        })
-      );
   };
 
   const handleUserLoginForm = () => {
@@ -66,14 +42,35 @@ const Login = () => {
         isClosable: true,
       });
     } else {
-      localStorage.setItem("loginuser", JSON.stringify(LoginData));
+      dispatch(userLogin(LoginData));
     }
   };
 
-  const CallLoginFunction = () => {
-    CheckUser();
-    handleUserLoginForm();
+  const checkUserDatastatus = () => {
+    if (user !== null) {
+      toast({
+        title: user.msg,
+        status: "success",
+        isClosable: true,
+      });
+      let userData = user.user;
+      localStorage.setItem("user-token", user.token);
+      localStorage.setItem("userID", userData._id);
+      localStorage.setItem("user-details", JSON.stringify(user.user));
+      navigate("/");
+      window.location.reload();
+    } else if (isError) {
+      toast({
+        title: "Invalid Credentials",
+        status: "error",
+        isClosable: true,
+      });
+    }
   };
+
+  useEffect(() => {
+    checkUserDatastatus();
+  }, [user]);
 
   return (
     <Box bg={useColorModeValue("gray.50", "gray.800")}>
@@ -140,7 +137,7 @@ const Login = () => {
 
               <Stack spacing={10} pt={2}>
                 <Button
-                  onClick={CallLoginFunction}
+                  onClick={handleUserLoginForm}
                   loadingText="Submitting"
                   size="lg"
                   bg={"#df9018"}

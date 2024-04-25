@@ -47,8 +47,6 @@ const AdminKid = () => {
     }
   };
 
-  console.log(kidData);
-
   useEffect(() => {
     getKid();
   }, []);
@@ -75,7 +73,7 @@ const AdminKid = () => {
           isClosable: true,
         })
       );
-    window.location.reload();
+    getKid();
   };
 
   // ----------------------- Add New Kid -------------------

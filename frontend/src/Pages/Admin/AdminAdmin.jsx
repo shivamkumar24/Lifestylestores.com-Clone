@@ -45,8 +45,6 @@ const AdminAdmin = () => {
     }
   };
 
-  console.log(adminData);
-
   useEffect(() => {
     getAdmin();
   }, []);
@@ -73,7 +71,7 @@ const AdminAdmin = () => {
           isClosable: true,
         })
       );
-    window.location.reload();
+    getAdmin();
   };
 
   // ----------------------- Add New Admin -------------------

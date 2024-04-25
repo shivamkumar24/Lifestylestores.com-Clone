@@ -5,6 +5,8 @@ import {
   Text,
   Image,
   Input,
+  Button,
+  HStack,
   Popover,
   useToast,
   MenuList,
@@ -13,8 +15,6 @@ import {
   MenuButton,
   InputGroup,
   InputLeftElement,
-  Button,
-  HStack,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
@@ -32,16 +32,21 @@ const Navbar = () => {
   const [cartDataLength, setCartDataLength] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [userName, setUserName] = useState("User");
+  const [adminStatus, setAdminStatus] = useState("Admin");
 
   const token = localStorage.getItem("user-token");
+  const adminToken = localStorage.getItem("admin-token");
 
   const getUserData = () => {
     if (token !== null) {
       const user = localStorage.getItem("user-details");
       const parsedUser = JSON.parse(user);
-      let user_name = parsedUser.name;
-      user_name = user_name.split(" ");
+      let user_names = parsedUser?.name;
+      let user_name = user_names !== null && user_names?.split(" ");
       setUserName(user_name[0]);
+    }
+    if (adminToken !== null) {
+      setUserName("Admin");
     }
   };
 
@@ -55,7 +60,7 @@ const Navbar = () => {
           },
         }
       );
-      const data1 = response.data.cartData;
+      const data1 = response?.data?.cartData;
       setCartDataLength(data1.length);
     } catch (error) {
       console.log("Error: ", error);
@@ -64,7 +69,10 @@ const Navbar = () => {
 
   useEffect(() => {
     token === null ? setIsAuth(false) : setIsAuth(true);
-  }, [token]);
+    adminToken !== null
+      ? setAdminStatus("Admin Sign Out")
+      : setAdminStatus("Admin");
+  }, [token, adminToken]);
 
   useEffect(() => {
     getCartData();
@@ -81,7 +89,18 @@ const Navbar = () => {
 
   const userLogout = () => {
     localStorage.clear();
-    window.location.reload();
+    navigate("/login");
+    setUserName("user");
+  };
+
+  const handleAdmin = () => {
+    if (adminToken) {
+      localStorage.clear();
+      navigate("/adminLogin");
+      setAdminStatus("Admin");
+    } else {
+      navigate("/adminLogin");
+    }
   };
 
   return (
@@ -196,9 +215,7 @@ const Navbar = () => {
                 <MenuItem>My Address</MenuItem>
                 <MenuItem>Payments</MenuItem>
                 <MenuItem>Reviews</MenuItem>
-                <MenuItem onClick={() => navigate("/adminLogin")}>
-                  Admin
-                </MenuItem>
+                <MenuItem onClick={handleAdmin}>{adminStatus}</MenuItem>
               </MenuGroup>
 
               {isAuth === true ? (

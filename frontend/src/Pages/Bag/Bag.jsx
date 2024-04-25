@@ -9,10 +9,11 @@ import {
   Select,
   Button,
   Skeleton,
+  useToast,
 } from "@chakra-ui/react";
 
 const Bag = () => {
-  const [loaded, setLoaded] = useState(false);
+  const toast = useToast();
   const [data, setData] = useState([]);
   const [sort, setSort] = useState("price");
   const [order, setOrder] = useState("asc");
@@ -28,6 +29,11 @@ const Bag = () => {
       setData(data1);
     } catch (error) {
       console.log("Error: ", error);
+      toast({
+        title: "Error fetching product data",
+        status: "error",
+        isClosable: true,
+      });
     }
   };
 
@@ -43,15 +49,7 @@ const Bag = () => {
 
   useEffect(() => {
     getData(page, sort, order, category);
-    if (!loaded) {
-      setLoaded(true);
-      const pageRelaod = setTimeout(() => {
-        window.location.reload();
-      }, 100);
-
-      clearTimeout(pageRelaod);
-    }
-  }, [page, sort, order, category, loaded]);
+  }, [page, sort, order, category]);
 
   console.log(data);
 

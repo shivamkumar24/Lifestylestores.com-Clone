@@ -47,8 +47,6 @@ const AdminMen = () => {
     }
   };
 
-  console.log(menData);
-
   useEffect(() => {
     getMen();
   }, []);
@@ -75,7 +73,7 @@ const AdminMen = () => {
           isClosable: true,
         })
       );
-    window.location.reload();
+    getMen();
   };
 
   // ----------------------- Add New Men -------------------

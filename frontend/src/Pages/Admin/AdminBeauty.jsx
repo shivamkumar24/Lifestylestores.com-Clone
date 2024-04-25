@@ -47,8 +47,6 @@ const AdminBeauty = () => {
     }
   };
 
-  console.log(beautyData);
-
   useEffect(() => {
     getBeauty();
   }, []);
@@ -75,7 +73,7 @@ const AdminBeauty = () => {
           isClosable: true,
         })
       );
-    window.location.reload();
+    getBeauty();
   };
 
   // // ----------------------- Add New Beauty -------------------
