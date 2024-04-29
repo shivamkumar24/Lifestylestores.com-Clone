@@ -15,15 +15,14 @@ import React, { useEffect, useState } from "react";
 const Beauty = () => {
   const toast = useToast();
   const [data, setData] = useState([]);
-  const [sort, setSort] = useState("price");
-  const [order, setOrder] = useState("asc");
-  const [category, setCategory] = useState("Skincare");
+  const [order, setOrder] = useState("");
+  const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
 
-  const getData = async (page, sort, order, category) => {
+  const getData = async (page, order, category) => {
     try {
       const response = await axios.get(
-        `https://calm-tutu-bass.cyclic.app/beauty?sort=${sort}&order=${order}&category=${category}&page=${page}`
+        `https://calm-tutu-bass.cyclic.app/beauty?sort=price&order=${order}&category=${category}&page=${page}`
       );
       const data1 = response.data.beauties;
       setData(data1);
@@ -48,10 +47,10 @@ const Beauty = () => {
   };
 
   useEffect(() => {
-    getData(page, sort, order, category);
-  }, [page, sort, order, category]);
+    getData(page, order, category);
+  }, [page, order, category]);
 
-  console.log(data);
+  console.log("BeautyData: ", data);
 
   return (
     <Box>

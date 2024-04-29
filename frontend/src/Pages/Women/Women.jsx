@@ -15,15 +15,14 @@ import React, { useEffect, useState } from "react";
 const Women = () => {
   const toast = useToast();
   const [data, setData] = useState([]);
-  const [sort, setSort] = useState("price");
-  const [order, setOrder] = useState("asc");
-  const [category, setCategory] = useState("Kurtas and Kurtis");
+  const [order, setOrder] = useState("");
+  const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
 
-  const getData = async (page, sort, order, category) => {
+  const getData = async (page, order, category) => {
     try {
       const response = await axios.get(
-        `https://calm-tutu-bass.cyclic.app/women?sort=${sort}&order=${order}&category=${category}&page=${page}`
+        `https://calm-tutu-bass.cyclic.app/women?sort=price&order=${order}&category=${category}&page=${page}`
       );
       const data1 = response.data.womens;
       setData(data1);
@@ -48,10 +47,10 @@ const Women = () => {
   };
 
   useEffect(() => {
-    getData(page, sort, order, category);
-  }, [page, sort, order, category]);
+    getData(page, order, category);
+  }, [page, order, category]);
 
-  console.log(data);
+  console.log("WomenData: ", data);
 
   return (
     <Box>
